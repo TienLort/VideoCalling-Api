@@ -8,14 +8,6 @@ import { routers } from "./src/routes";
 
 const app = express();
 
-mongoose.connect(config.mongodbUri, (error) => {
-  if (error) {
-    return console.log(error);
-  }
-
-  console.log("mongodb connect success!");
-});
-
 app.use(cors());
 app.use(helmet());
 app.use(express.json());
