@@ -4,6 +4,7 @@ import { spawn } from "child_process";
 import { initializeApp } from "firebase/app";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import config from "../config/firebase.config";
+import path from "path";
 
 initializeApp(config.firebaseConfig);
 
@@ -23,11 +24,16 @@ const testGetFireBase = async (req: Request, res: Response, next: NextFunction) 
             type: type,
           };
           const jsonData = JSON.stringify(data);
-
-          const pythonProcess = spawn("python", [
-            "E:\\AI-PBL\\PBL\\ViT\\efficient-vit\\getText.py",
-            jsonData,
-          ]);
+          const renderPath = path.join(
+            __dirname,
+            "..",
+            "..",
+            "..",
+            "src",
+            "python-scripts",
+            "DetectDeepFake.py"
+          );
+          const pythonProcess = spawn("python", [renderPath, jsonData]);
           console.log("text:", jsonData);
           pythonProcess.stdout.on("data", (data) => {
             // Xử lý kết quả từ Python

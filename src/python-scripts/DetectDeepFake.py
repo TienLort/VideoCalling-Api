@@ -17,32 +17,32 @@ from firebase_admin import credentials
 from firebase_admin import storage
 from google.cloud import storage
 
-cred = credentials.Certificate("E:\AI-PBL\PBL\ViT\\videocall1.json")
-firebase_admin.initialize_app(cred, {
-    'storageBucket': 'videocall1-51243.appspot.com'
-})
-os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = "E:\AI-PBL\PBL\ViT\\videocall1.json"
+# cred = credentials.Certificate("E:\AI-PBL\PBL\ViT\\videocall1.json")
+# firebase_admin.initialize_app(cred, {
+#     'storageBucket': 'videocall1-51243.appspot.com'
+# })
+# os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = "E:\AI-PBL\PBL\ViT\\videocall1.json"
 
 
-def upload_image(image_path, destination):
-    bucket = storage.bucket()
+# def upload_image(image_path, destination):
+#     bucket = storage.bucket()
 
-    blob = bucket.blob(destination)
-    blob.upload_from_filename(image_path)
+#     blob = bucket.blob(destination)
+#     blob.upload_from_filename(image_path)
 
-    print('Hình ảnh đã được tải lên thành công.')
+#     print('Hình ảnh đã được tải lên thành công.')
 
 
-def delete_folder(bucket_name, folder_path):
-    client = storage.Client()
-    bucket = client.get_bucket(bucket_name)
+# def delete_folder(bucket_name, folder_path):
+#     client = storage.Client()
+#     bucket = client.get_bucket(bucket_name)
 
-    blobs = bucket.list_blobs(prefix=folder_path)
+#     blobs = bucket.list_blobs(prefix=folder_path)
 
-    for blob in blobs:
-        blob.delete()
+#     for blob in blobs:
+#         blob.delete()
 
-    print('Thư mục đã được xóa thành công.')
+#     print('Thư mục đã được xóa thành công.')
 
 
 resize_x = 224
@@ -67,10 +67,10 @@ def download_video(url, save_dir, video_name):
 def download_img(url, save_dir, image_name):
     response = requests.get(url, stream=True)
     response.raise_for_status()
-
+    print(url, save_dir, image_name)
     # Tạo đường dẫn lưu trữ tự động
     save_path = os.path.join(save_dir, image_name+".jpg")
-
+    print(save_path)
     # Tạo thư mục lưu trữ nếu chưa tồn tại
     os.makedirs(save_dir, exist_ok=True)
 
