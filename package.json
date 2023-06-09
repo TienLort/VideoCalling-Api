@@ -8,6 +8,9 @@
     "dev": "ts-node-dev index.ts",
     "build": "tsc"
   },
+  "engines": {
+    "python": "3.9.7"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
