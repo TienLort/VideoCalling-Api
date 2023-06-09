@@ -312,6 +312,8 @@ if __name__ == '__main__':
     # Xử lý dòng văn bản
     print(data_json)
     data = json.loads(data_json)
+    render_working_dir = os.environ.get('RENDER_WORKING_DIR')
+    print(render_working_dir)
     out_path = 'E:\AI-PBL\PBL\ViT\dataset\\data'
     if(data["type"] == "img"):
         start_time = time.time()
