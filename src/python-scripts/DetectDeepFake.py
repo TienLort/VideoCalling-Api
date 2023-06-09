@@ -12,11 +12,12 @@ from statistics import mean
 import time
 import datetime
 import json
-import firebase_admin
-from firebase_admin import credentials
-from firebase_admin import storage
-from google.cloud import storage
+# import firebase_admin
+# from firebase_admin import credentials
+# from firebase_admin import storage
+# from google.cloud import storage
 from efficient_vit1 import EfficientViT
+
 # cred = credentials.Certificate("E:\AI-PBL\PBL\ViT\\videocall1.json")
 # firebase_admin.initialize_app(cred, {
 #     'storageBucket': 'videocall1-51243.appspot.com'
@@ -308,6 +309,7 @@ def delFolder(path):
 
 
 if __name__ == '__main__':
+
     data_json = sys.argv[1]
     # Xử lý dòng văn bản
     print(data_json)
