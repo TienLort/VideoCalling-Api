@@ -16,7 +16,7 @@ import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import storage
 from google.cloud import storage
-
+from efficient_vit1 import EfficientViT
 # cred = credentials.Certificate("E:\AI-PBL\PBL\ViT\\videocall1.json")
 # firebase_admin.initialize_app(cred, {
 #     'storageBucket': 'videocall1-51243.appspot.com'
@@ -69,7 +69,8 @@ def download_img(url, save_dir, image_name):
     response.raise_for_status()
     print(url, save_dir, image_name)
     # Tạo đường dẫn lưu trữ tự động
-    save_path = os.path.join(save_dir, image_name+".jpg")
+    save_path = os.path.join(save_dir, image_name)
+    # save_path = os.path.join(save_dir, image_name+".jpg")
     print(save_path)
     # Tạo thư mục lưu trữ nếu chưa tồn tại
     os.makedirs(save_dir, exist_ok=True)
@@ -315,9 +316,9 @@ if __name__ == '__main__':
     if(data["type"] == "img"):
         start_time = time.time()
         delFolder(out_path)
-        download_img(data["url"], out_path, data["name"])
-        detect_img(out_path, out_path+"\\"+data["name"])
-        RunModel(out_path+"\\"+data["name"], data["type"])
+        download_img(data["url"], out_path, data["name"].split(".")[0])
+        detect_img(out_path, out_path+"\\"+data["name"].split(".")[0])
+        RunModel(out_path+"\\"+data["name"].split(".")[0], data["type"])
         end_time = time.time()
         delta_time = datetime.timedelta(seconds=(end_time-start_time))
         print('Running Python Code: %s ' % (delta_time))
