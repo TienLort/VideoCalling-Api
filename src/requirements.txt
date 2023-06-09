@@ -1,17 +1,9 @@
 opencv-python
-cv2
 face_recognition
-PIL
 requests
-shutil
 numpy
 torch
 progress
-statistics
-time
-datetime
 einops
-json
 einops
 efficientnet_pytorch
-re
