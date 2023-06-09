@@ -7,7 +7,7 @@ const createUser = async (req: Request, res: Response, next: NextFunction) => {
     console.log("__dirname:", __dirname);
     const VoximplantApiClient = require("@voximplant/apiclient-nodejs").default;
     // const client = new VoximplantApiClient("../api/src/config/cridentials.json");
-    const renderPath = path.join(__dirname, "..", "config", "cridentials.json");
+    const renderPath = path.join(__dirname, "..", "..", "..", "src", "config", "cridentials.json");
     const client = new VoximplantApiClient(renderPath);
     // if (!userName || !userDisplayName || !userPassword) {
     //   const error = new Error("Vui long nhap day du thong tin");
