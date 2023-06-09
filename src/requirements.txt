@@ -5,5 +5,4 @@ numpy
 torch
 progress
 einops
-einops
 efficientnet_pytorch
