@@ -17,6 +17,7 @@ import json
 # from firebase_admin import storage
 # from google.cloud import storage
 from efficient_vit1 import EfficientViT
+import mediapipe as mp
 
 # cred = credentials.Certificate("E:\AI-PBL\PBL\ViT\\videocall1.json")
 # firebase_admin.initialize_app(cred, {
@@ -82,18 +83,38 @@ def download_img(url, save_dir, image_name):
 
 
 def detect(img, new_path, imglist):
-    image = face_recognition.load_image_file(img)
-    face_locations = face_recognition.face_locations(image)
-    if len(face_locations) == 0:
-        return []
-    # In this case: save the first face found in a pic
-    # Get the location of each face in this image
-    top, right, bottom, left = face_locations[0]
-    face_image = image[top:bottom, left:right]
-    pil_image = Image.fromarray(face_image)
-    resized_face = pil_image.resize((resize_x, resize_y))
-    (filename, extension) = os.path.splitext(imglist)
-    resized_face.save(new_path+'/FR_'+filename+extension)
+    # image = face_recognition.load_image_file(img)
+    # face_locations = face_recognition.face_locations(image)
+    # if len(face_locations) == 0:
+    #     return []
+    # # In this case: save the first face found in a pic
+    # # Get the location of each face in this image
+    # top, right, bottom, left = face_locations[0]
+    # face_image = image[top:bottom, left:right]
+    # pil_image = Image.fromarray(face_image)
+    # resized_face = pil_image.resize((resize_x, resize_y))
+    # (filename, extension) = os.path.splitext(imglist)
+    # resized_face.save(new_path+'/FR_'+filename+extension)
+
+    image = cv2.imread(img)
+
+    mp_face_detection = mp.solutions.face_detection
+    with mp_face_detection.FaceDetection(min_detection_confidence=0.5) as face_detection:
+        image_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+
+        results = face_detection.process(image_rgb)
+
+        face = results.detections[0].location_data.relative_bounding_box
+        h, w, _ = image.shape
+        top = int(face.ymin * h)
+        right = int((face.xmin + face.width) * w)
+        bottom = int((face.ymin + face.height) * h)
+        left = int(face.xmin * w)
+
+        face_image = image[top:bottom, left:right]
+        resized_face = cv2.resize(face_image, (resize_x, resize_y))
+        (filename, extension) = os.path.splitext(imglist)
+        cv2.imwrite(new_path+'/FR_'+filename+extension, resized_face)
 
 
 def detect_video(original_path, new_path):

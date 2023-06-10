@@ -1,6 +1,5 @@
 opencv-python
-cmake
-face_recognition
+mediapipe
 requests
 numpy
 torch
