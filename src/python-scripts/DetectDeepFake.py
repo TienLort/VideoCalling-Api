@@ -272,7 +272,7 @@ def RunModel(path, type):
     start_time = time.time()
     modelTest = EfficientViT(channels=1280, selected_efficient_net=0)
     modelTest.load_state_dict(torch.load(
-        'E:\AI-PBL\PBL\deepfake\\assets\\data\\EfficientViT_checkpoint_39.pt', map_location=torch.device('cpu')))
+        './EfficientViT_checkpoint_39.pt', map_location=torch.device('cpu')))
     modelTest.eval()
     modelTest = modelTest.cpu()
     bar = Bar('Predicting', max=len(dataset))
@@ -330,13 +330,10 @@ def delFolder(path):
 
 
 if __name__ == '__main__':
-
     data_json = sys.argv[1]
     # Xử lý dòng văn bản
     print(data_json)
     data = json.loads(data_json)
-    render_working_dir = os.environ.get('RENDER_WORKING_DIR')
-    print(render_working_dir)
     out_path = 'E:\AI-PBL\PBL\ViT\dataset\\data'
     if(data["type"] == "img"):
         start_time = time.time()
