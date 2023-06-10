@@ -1,8 +1,7 @@
 import sys
 import os
-import cv2
-import face_recognition
-from PIL import Image
+# import face_recognition
+# from PIL import Image
 import requests
 import shutil
 import numpy as np
@@ -12,6 +11,7 @@ from statistics import mean
 import time
 import datetime
 import json
+import cv2
 # import firebase_admin
 # from firebase_admin import credentials
 # from firebase_admin import storage
